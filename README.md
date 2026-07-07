@@ -35,6 +35,24 @@ translation the lines actually need.
 - **Sources:** the full text of any issue lives at its dated URL, e.g.
   <https://jamesclear.com/3-2-1/february-1-2024>.
 
+## From reading to shipping — the loop closed
+
+This wasn't just an essay. Mining the archive against how autonomous AI agents *actually* operate
+fed concrete changes back into open Claude Code skills:
+
+- **A review's default closing move** is now Adam Grant's *"On a scale of 0–10, how was it? And how
+  do I get closer to a 10?"* (from the 2025-03-25 issue) — merged into the **calibrated-critique**
+  skill: <https://github.com/evnchn-agentic/calibrated-critique/pull/1>
+- **A two-word verification pre-flight**, *"Is that assumed or confirmed?"* (Jeanne Torre, via the
+  2024-03-28 issue), was added to the **seeing-is-believing** skill:
+  <https://github.com/evnchn-agentic/chengyu-skills/pull/16>
+- **A process lesson from building this page:** the ~40 quotes here were fact-checked against
+  primary sources by a dedicated adversarial pass, and **~20% were provably wrong as first
+  extracted** (apocryphal, mis-credited, or paraphrase-as-verbatim) — and **none** were caught by
+  the model that pulled them. That's now a standing rule: **never publish LLM-extracted quotes
+  without a fresh fact-check pass.** (It's why the caveat fold on the page lists its exceptions
+  honestly.)
+
 ## Viewing
 
 `index.html` is self-contained — clone and open it locally, or once this repo is public, view it

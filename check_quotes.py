@@ -10,6 +10,7 @@ import html
 import pathlib
 import re
 import sys
+import time
 import urllib.error
 import urllib.request
 
@@ -42,6 +43,8 @@ def citations(page_text: str):
             yield q, dates
         pending = []
         pos = m.end()
+    for q in QUOTE.findall(flat[pos:]):
+        print(f'UNDATED  "{q}" (not checked)')
 
 
 def issue(date: str, cache: pathlib.Path) -> str:
@@ -51,18 +54,28 @@ def issue(date: str, cache: pathlib.Path) -> str:
     if not f.exists():
         req = urllib.request.Request(f'https://jamesclear.com/3-2-1/{slug}', headers={'User-Agent': 'Mozilla/5.0'})
         try:
+            time.sleep(0.5)
             f.write_bytes(urllib.request.urlopen(req, timeout=30).read())
         except urllib.error.HTTPError as e:
             if e.code != 404:
                 raise
             return ''  # no issue was sent that day
-    return norm(text_of(f.read_text(errors='replace')))
+    body = text_of(f.read_text(errors='replace'))
+    # the issue itself, without the "Read Next" sidebar that lists other issues
+    start, end = body.find('3 IDEAS FROM ME'), body.find('Until next week')
+    return norm(body[max(start, 0):end if end > 0 else None])
 
 
 def found(quote: str, body: str) -> bool:
     # an ellipsis marks an elision, so each kept fragment must appear on its own
     parts = [norm(p) for p in re.split(r'…|\.\.\.|\[[^\]]*\]', quote)]
-    return all(p in body for p in parts if p)
+    pos = 0
+    for p in filter(None, parts):
+        i = body.find(p, pos)
+        if i < 0 or (pos and i - pos > 600):  # fragments in order, within one passage
+            return False
+        pos = i + len(p)
+    return True
 
 
 def main() -> int:

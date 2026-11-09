@@ -30,8 +30,11 @@ translation the lines actually need.
   flagged inline where they appear** — e.g. "Don't explain your philosophy. Embody it." is a modern
   distillation of Epictetus (*Enchiridion* 46), not a verbatim quote; "Simplify, then add lightness"
   and "ask forgiveness than permission" are folklore their named figures popularized rather than
-  coined. Nothing is presented as verbatim where it isn't. See the footer of `index.html` for the
-  full exceptions list.
+  coined. See the footer of `index.html` for the full exceptions list.
+- **Quote text vs. the cited issue (2026-10-31):** a second pass checked every quoted line against
+  the text of the issue it cites. 22 lines were reworded or carried the wrong date (one cited an
+  issue that does not exist), and now use the issue's own words. Re-run with
+  `python3 check_quotes.py` (fetches the cited issues; exits 1 on any miss).
 - **Sources:** the full text of any issue lives at its dated URL, e.g.
   <https://jamesclear.com/3-2-1/february-1-2024>.
 
@@ -40,8 +43,8 @@ translation the lines actually need.
 This wasn't just an essay. Mining the archive against how autonomous AI agents *actually* operate
 fed concrete changes back into open Claude Code skills:
 
-- **A review's default closing move** is now Adam Grant's *"On a scale of 0–10, how was it? And how
-  do I get closer to a 10?"* (from the 2025-03-25 issue) — merged into the **calibrated-critique**
+- **A review's default closing move** is now a question built on Adam Grant's *"I ask for a 0-10
+  score. … Then I ask how I can get closer to a 10."* (from the 2021-03-25 issue) — merged into the **calibrated-critique**
   skill: <https://github.com/evnchn-agentic/calibrated-critique/pull/1>
 - **A two-word verification pre-flight**, *"Is that assumed or confirmed?"* (Jeanne Torre, via the
   2024-03-28 issue), was added to the **seeing-is-believing** skill:
